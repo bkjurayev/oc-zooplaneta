@@ -1,0 +1,76 @@
+[viewBag]
+==
+{% set obCartElementList = Cart.get() %}
+
+<div class="top">    
+    <p class="current">Шаг 1. Состав заказа</p>
+    <p>Шаг 2. Контактные данные</p>
+    <p class="disable">Шаг 3. Выбор доставки оплаты</p>
+</div>
+<div class="orders_box">
+    {% if obCartElementList.isNotEmpty() %}
+        {% for obCartElement in obCartElementList %}
+            {% set obOffer = obCartElement.offer %}
+            {% set obProduct = obOffer.product %}
+            
+            <div class="order_item asx-order">
+                <div class="col_1">
+                    <img src="{{ obProduct.preview_image.getThumb(160, 115) }}" alt="">
+                    <p class="name">
+                        <a href="{{ obProduct.getPageUrl('product/product') }}">{{ obProduct.name }}</a>
+                    </p>
+                </div>
+                
+                <div class="col_2 button-basket">
+                    <div class="price"> {{ obOffer.price }} <span>{{obOffer.currency}}.</span></div>
+                    <div class="d-flex justify-content-between count">
+        		  		<button class="btn btn-quantity-minus" type="button" onclick="countSpinner($('#productQuantity-{{obOffer.id}}'), 0)">-</button>
+                        <input 
+                            data-request="Cart::onUpdate" 
+                            data-track-input="1000"
+                            data-request-data="'cart[0][id]': {{ obCartElement.id }}"
+                            data-request-update="'order/cart-items': '#order-cartItems'"
+                            class="input-quantity" 
+                            id="productQuantity-{{obOffer.id}}" 
+                            name="cart[0][quantity]" 
+                            type="number" 
+                            value="{{ obCartElement.quantity }}">
+        		  		<button class="btn btn-quantity-plus" type="button" onclick="countSpinner($('#productQuantity-{{obOffer.id}}'), 1)">+</button>
+        		  	</div>
+                    
+                    <div class="price">{{ obCartElement.price }} <span>{{ obCartElement.currency }}.</span></div>
+                    <button data-id="{{obCartElement.id}}" class="del"></button>
+                </div>
+            </div>
+            
+        {% endfor %}
+    
+        
+    {% else %}
+        <div style="text-align: center">Cart is empty</div>
+    {% endif %}
+</div>
+
+
+<div class="bottom">
+    <p class="total">Итого: {{ obCartElementList.getTotalPrice() }} <span>{{ obCartElementList.getCurrency() }}.</span></p>
+    <div class="flex">
+        <a href="{{'purchase/basket2'|page}}" class="btn">Оформить заказ</a>
+        <a href="{{'index'|page}}" class="back">К покупкам</a>
+    </div>
+</div>
+
+
+
+{% put scripts %}
+   <script>
+    function countSpinner(element, n){
+        if (element.length == 0) return false;
+        var value = parseInt(element.val());
+        value = n ? ++value : --value;
+    
+        element.val(value > 0 ? value : 1);
+        element.trigger('input');
+    }
+   </script>
+{% endput %}

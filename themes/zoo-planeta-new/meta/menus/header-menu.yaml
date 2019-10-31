@@ -1,0 +1,28 @@
+name: 'Header menu'
+items:
+    -
+        title: 'О нас'
+        nesting: ''
+        type: cms-page
+        url: ''
+        code: ''
+        reference: pages/about
+        cmsPage: ''
+        replace: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Контакты
+        nesting: ''
+        type: cms-page
+        url: ''
+        code: ''
+        reference: pages/contacts
+        cmsPage: ''
+        replace: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'

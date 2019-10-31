@@ -1,0 +1,146 @@
+[viewBag]
+
+[staticMenu]
+code = "header-menu"
+==
+{% set obCategoryList = CategoryList.make().tree() %}
+
+<div class="wrap top">
+    <a href="{{'index'|page}}" class="logo" style="width: 35%;">
+    	<picture>
+    		<source media="(min-width: 1200px)" srcset="{{ 'assets/images/zoo-logo.jpg' | theme }}">
+    		<source media="(min-width: 670px)" srcset="{{ 'assets/images/zoo-logo.jpg' | theme }}">
+    		<img src="{{ 'assets/images/zoo-logo.jpg' | theme }}" width="240" alt="logo" style="border-radius: 15px;">
+    	</picture>
+    </a>
+	<div class="block">
+		<div class="line mobi">
+            <form action="/list" class="search">
+                <div>
+                    <input type="text" name="query" placeholder="Поиск" value="{{ input('query') }}">
+                    <button></button>
+                </div>
+            </form>
+            <div class="group">
+                <a class="tel" href="tel:+38(900)900-90-90">
+                    {{ this.theme.phone ? this.theme.phone : '(900)900-90-90' }}
+                </a>
+                <p class="mail">e-mail@info.com</p>
+                
+                {% if user %}
+                    <a href="{{'cabinet/index'|page}}" class="lk">Личный кабинет</a>
+                {% else %}
+                    <a  data-fancybox="#sing_up" data-src="#sing_in" class="lk">Личный кабинет</a>
+                {% endif %}
+            </div>
+            {#<a href="{{ 'product/comparison'| page }}" class="libra"><img src="{{ 'assets/images/icons/libra2.svg' | theme }}" alt=""></a>            #}
+            <div class="fixi" style="background: transparent;">
+                <div class="menu_ico"><div></div></div>
+                <div class="basket" id="cart-content">
+                    {% partial 'order/cart-content' %}
+                </div>
+            </div>            
+		</div>			
+        <div class="modal">
+            <div id="sing_in" class="window">
+                <p class="caption">Войти в систему</p>
+                <form action="#" class="sing_form" data-request="onSignin">
+                    
+                    {% partial 'account/signin' %}
+                   
+                </form>
+            </div>
+                        
+            <div id="sing_up" class="window">
+                <p class="caption">Регистарция</p>
+                <form action="#" class="sing_form" data-request="onRegister">
+                
+                    {% partial 'account/register' %}  
+               
+                </form>
+            </div>
+       </div>
+   </div>        
+</div>
+<div class="wrap bottom">
+   <div class="block">
+       <div class="line mobi mobile-menu">
+            <form action="/list" class="search">
+                <div>
+                    <input type="text" name="query" placeholder="Поиск" value="{{ input('query') }}">
+                    <button></button>
+                </div>
+            </form>
+            <div class="group">
+                <a class="tel" href="tel:+38(900)900-90-90">
+                    {{ this.theme.phone }}
+                </a>
+                <p class="mail">e-mail@info.com</p>
+                
+                {% if user %}
+                    <a href="{{'cabinet/index'|page}}" class="lk">Личный кабинет</a>
+                {% else %}
+                    <a  data-fancybox="#sing_in" data-src="#sing_in" class="lk">Личный кабинет</a>
+                {% endif %}
+            </div>
+            <a href="{{ 'product/comparison'| page }}" class="libra"><img src="{{ 'assets/images/icons/libra2.svg' | theme }}" alt=""></a>
+            
+            <div class="fixi" style="background: transparent;">
+                <div class="menu_ico"><div></div></div>
+                <div class="basket" id="cart-content">
+                    {% partial 'order/cart-content' %}
+                </div>
+            </div>
+            
+	   </div>
+       <div class="line for_menu">
+    		{% for obCategory in obCategoryList %}            
+        		<div class="for_catalog">
+        		    <img src="{{obCategory.preview_image.path}}" width="40" alt="">
+                    <p class="sub_menu" style="color: black;margin-left:10px;"><b>{{obCategory.name}}</b></p>
+                    <ul class="ul_catalog" style="overflow: auto;">
+                        <li class="back"><span>В меню</span></li>
+                        
+                        {% for obChildren in obCategory.children %}    
+                            <li style="height: 65px;">                                
+                                <a href="{{ 'product/catalog'|page({category: obChildren.slug}) }}"><img src="{{obChildren.preview_image.path}}" width="40">{{obChildren.name|truncate(28)}}</a>
+                            </li>
+                        {% endfor %}
+                        
+                    </ul>
+                    
+        		</div>        		
+    		{%endfor%}    		
+    	</div>
+    </div>	
+</div>
+
+
+
+<style>
+    .line.for_menu .for_catalog:last-child .ul_catalog{
+        margin-left: -60px; 
+    }
+    .wrap.top{
+        background: #f7a61c url(http://demo.templatetrip.com/Prestashop/PRS05/PRS121_multi/PRS01/themes/PRS01/assets/img/header-bg.png)
+    }
+    .wrap.top .block{
+        background: transparent;
+    }
+    .wrap.top .line.mobi{
+        background: transparent;margin-top:10px;
+    }
+    .wrap.bottom{
+        background:white;height:70px;border-bottom-style: solid;border-width: 0.1px;border-color: #d0d0d0;
+    }
+    .wrap.bottom ul.ul_catalog{
+        width: 385px;top: 114%!important;
+    }
+    .wrap.bottom .ul_catalog a{
+        line-height: 4;font-size: 16px;
+    }
+    .wrap.bottom .ul_catalog a img{
+        padding-right:10px;padding-top: 5%;display: inline-block;
+    }
+    
+</style>

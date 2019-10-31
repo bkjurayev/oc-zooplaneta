@@ -1,0 +1,90 @@
+[CategoryList]
+
+[ProductList]
+sorting = "new"
+
+[ProductList ProductList2]
+sorting = "new"
+
+[Cart]
+
+[breadcrumbs]
+main-ol-class = "breadcrumb"
+active-class = "active"
+disabled-class = "disabled"
+
+[session]
+security = "all"
+
+[account]
+redirect = "cabinet/index"
+paramCode = "code"
+forceSecure = 0
+
+[formSubscribe]
+urlToUnsubscribe = "unsubscribe"
+urlToProfile = "subscriber-profile"
+geo = "enabled"
+thanksMessage = "Спасибо за подписку!"
+errorMessage = "Email already exists!"
+
+[ProductData]
+==
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title> {{ this.page.title }} | {{ this.theme.name }} </title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{{ 'assets/css/style.css' | theme }}">
+	<link rel="stylesheet" type="text/css" href="{{'assets/css/jquery.fancybox.min.css'| theme }}">
+	<link rel="shortcut icon" href="{{ this.theme.favicon.path }}" type="image/x-icon">
+	
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="{{ 'assets/js/js_todo/jquery.repeatable.js' | theme }}"></script>  
+	
+</head>
+
+<body>
+    
+    <header class="header">
+        {% partial 'site/header' %}
+    </header>
+    
+    <div class="container">
+        {% component 'breadcrumbs' %}
+    
+        {% page %}
+    </div>
+    
+    <footer class="footer">
+        {% partial 'site/footer' %}
+    </footer>
+    
+    <div class="footer_line">
+        <div class="wrap">
+            <p class="copy">© 2019. Все права защищены.</p>
+            <p class="created">Разработано:
+                <a href="http://itmaker.uz/">ITmaker.uz</a>
+            </p>
+        </div>
+    </div>
+
+    
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	{#<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></#}
+    
+    
+    <script src="{{ 'assets/js/js.js' | theme }}"></script>
+    <script src="{{ 'assets/js/ion.rangeSlider.min.js' | theme }}"></script>
+    <script src="{{ 'assets/js/jquery.fancybox.min.js' | theme }}"></script>
+    <script src="{{ 'assets/js/jquery.maskedinput.min.js' | theme }}"></script>
+    <script src="{{ 'assets/js/app.js' | theme }}"></script>    
+    {% framework extras %}
+    {% scripts %}
+    
+    
+</body>
+</html>

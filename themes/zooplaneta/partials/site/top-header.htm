@@ -1,0 +1,185 @@
+[viewBag]
+==
+{% set obCategoryList = CategoryList.make().tree() %}
+
+<div class="wrap bg-warning" style="background: #f7a61c url(http://demo.templatetrip.com/Prestashop/PRS05/PRS121_multi/PRS01/themes/PRS01/assets/img/header-bg.png) repeat-x scroll center bottom;">
+    <div class="row" style="padding: 14px;">
+        
+        <div class="col-lg-3 col-md-4">
+            <div class="row">
+                <div class="col-lg">            
+                    <img src="{{'assets/images/zoo-logo.jpg'|theme}}" alt="logo" style="border-radius:10px;">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-8">
+            <div class="row">
+                <div class="col-lg-5 col-md-12" style="padding: 10px;">
+                    <div id="search" class="input-group">
+                      <input type="text" name="search" value="" placeholder="Поиск" class="input-lg p-2 pl-3" style="border-radius: 17px 0 0 17px;">
+                      <button type="button" class="btn-lg px-4 bg-white border border-right-0 border-top-0 border-bottom-0" style="border-radius: 0 17px 17px 0;background: #fff url(http://demo.templatetrip.com/Prestashop/PRS05/PRS121_multi/PRS01/themes/PRS01/assets/img/sprite.png) no-repeat scroll 2px -232px;">    
+                      </button>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="service">
+                      <div class="service-content">
+                        <div class="service-title">Позвоните нам</div>
+                        <div class="service-desc"><a href="tel:+998998803336">+998 99 880 33 36</a></div>
+                      </div>
+                    </div>
+                </div>                
+                <div class="col-md">
+                    <div id="cart">
+                      <div id="_desktop_cart">
+                        <div class="blockcart cart-preview active">
+                          <div class="">
+                            <a rel="nofollow" href="http://zooplaneta.uz/index.php?route=checkout/checkout">
+                              <span class="">Корзина</span>
+                              <span class="cart-products-count"><span id="cart-total" class="cart-count">Товаров 0</span></span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>            
+        </div>                
+        
+    </div>
+</div>
+
+
+<div class="wrap">
+    <div class="row" style="padding: 0 10%;">
+        {% for obCategory in obCategoryList %}            
+            <div class="dropdown px-3">
+              <img src="{{obCategory.preview_image.path}}" width="40" alt="" class="d-inline-block">
+              <button class="dropbtn bg-white text-dark px-0">{{obCategory.name}}</button>
+              <div class="dropdown-content">                
+                  {% for obChildren in obCategory.children %}    
+                      <div>                                                    
+                          <a href="#"><img src="{{obChildren.preview_image.path}}" width="40" alt="" class="d-inline-block">{{obChildren.name}}</a>
+                      </div>      
+                  {%endfor%}
+              </div>
+            </div>            
+        {%endfor%}
+    </div>
+</div>    
+
+<style>
+    .dropbtn {      
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+    }
+    
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .dropdown-content a:hover {background-color: #ddd;}
+    
+    .dropdown:hover .dropdown-content {display: block;}
+    
+    .dropdown:hover .dropbtn {background-color: #3e8e41;}
+</style>
+
+
+
+<style>
+    .service .service-content {
+        padding-left: 65px;
+        position: relative;
+    }    
+    .service .service-content::before {
+        background: #fff;
+        content: "";
+        border-radius: 50%;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -khtml-border-radius: 50%;
+        bottom: 0;
+        height: 50px;
+        left: 0;
+        position: absolute;
+        top: -2px;
+        width: 50px;
+    }    
+    .service .service-content::after {
+        background: rgba(0,0,0,0) url(https://demo.templatetrip.com/Prestashop/PRS05/PRS121_multi/PRS01/themes/PRS01/assets/img/sprite.png) no-repeat scroll -29px -423px;
+        content: "";
+        height: 50px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        transition: all 400ms ease-in-out 0s;
+        width: 50px;
+    }
+    #_desktop_cart {
+        cursor: pointer;
+        display: block;
+        position: relative;                
+        float: none;
+    }    
+    .blockcart a {
+        cursor: pointer;
+        display: block;
+        height: 50px;
+        padding: 3px 10px 0 60px;
+        position: relative;
+        text-align: left;
+        width: 100%;
+    }
+    .blockcart a::before {
+        background: #fff;
+        border-radius: 50%;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -khtml-border-radius: 50%;
+        content: "";
+        height: 50px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 50px;
+    }
+    .blockcart span.cart-products-count {
+        color: #fff;
+        display: block;
+        font: 600 18px/24px "Poppins",sans-serif;
+    }
+    .blockcart a::after {
+        background: url(https://demo.templatetrip.com/Prestashop/PRS05/PRS121_multi/PRS01/themes/PRS01/assets/img/sprite.png) no-repeat scroll -25px -167px;
+        content: "";
+        height: 50px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 50px;
+        transition: all 400ms ease-in-out 0s;
+        -webkit-transition: all 400ms ease-in-out 0s;
+        -moz-transition: all 400ms ease-in-out 0s;
+        -o-transition: all 400ms ease-in-out 0s;
+        -ms-transition: all 400ms ease-in-out 0s;
+    }
+</style>

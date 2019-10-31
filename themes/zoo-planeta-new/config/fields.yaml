@@ -1,0 +1,98 @@
+tabs:
+    fields:
+        phone:
+            type: text
+            span: left
+            label: Номер телефона
+            tab: Settings  
+        favicon:
+            type: fileupload
+            span: right
+            label: Фавикон 
+            tab: Settings        
+        email:
+            type: text
+            span: left
+            label: Укажите почту
+            tab: Settings        
+        name:
+            type: text
+            span: left
+            label: Укажите название
+            tab: Settings            
+        social_links:
+            type: repeater
+            form:
+                fields:
+                    url:
+                        type: text
+                        label: Вставьте ссылку на соц. сеть
+                        span: left
+                    class:
+                        type: dropdown
+                        options:
+                            vk: Фейсбук
+                            insta: Инстаграм
+                            fb: Телеграм
+                        label: Название соц.сети
+                        span: right
+            tab: Settings
+        section_settings:
+            tab: Main page
+            label: Блок 1 
+            type: section
+            cssClass: 'p-a m-y control-scrollpanel'
+                
+        name_one:
+            type: text
+            span: left
+            label: Название 
+            tab: Main page                        
+        quentity_one:
+            type: number
+            span: left
+            label: Количество 
+            tab: Main page                                    
+        sort_one:
+            type: dropdown
+            options:
+                new: Новый
+                price|asc: Дороже
+                price|desc: Дешевле 
+                popularity|desc: Популярность
+                rating|desc: Ниже рейтинг
+                rating|asc: Выше рейтинг 
+            label: Сортировать по
+            span: right    
+            tab: Main page
+
+        section_settings_w:
+            tab: Main page
+            label: Блок 2 
+            type: section
+            cssClass: 'p-a m-y control-scrollpanel'    
+
+        name_two:
+            type: text
+            span: left
+            label: Название 
+            tab: Main page                        
+        quentity_two:
+            type: number
+            span: left
+            label: Количество 
+            tab: Main page                            
+        sort_two:
+            type: dropdown
+            options:
+                new: Новый
+                price|asc: Дороже
+                price|desc: Дешевле 
+                popularity|desc: Популярность
+                rating|desc: Ниже рейтинг
+                rating|asc: Выше рейтинг 
+            label: Сортировать по
+            span: right    
+            tab: Main page
+
+        

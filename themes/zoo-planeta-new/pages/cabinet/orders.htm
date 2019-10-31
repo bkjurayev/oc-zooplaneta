@@ -1,0 +1,84 @@
+title = "Личный кабинет"
+url = "/account/orders"
+layout = "default"
+is_hidden = 0
+child_of = "index"
+hide_crumb = 0
+remove_crumb_trail = 0
+crumb_disabled = 0
+
+[StatusList]
+
+[session]
+security = "user"
+==
+<div class="wrap">
+    <h1>Личный кабинет</h1>
+    <div class="help_block lk_block">
+        <div class="left">
+            <a href="{{'cabinet/index'| page}}">Личные данные</a>
+            <a href="{{'cabinet/orders'| page}}" class="active">Заказы</a>
+            {#<a href="{{'pages/program'|page}}">Партнерская программа</a>#}
+            <a href="{{'cabinet/password'| page}}">Изменение пароля</a>
+            <a href="#" data-request="onLogout" data-request-data="redirect: '/'" class="last">Выход</a>
+        </div>
+        <div class="right content">
+            <div class="sort">
+                <p class="title">Мои заказы</p>
+            </div>
+            <div class="orders">
+                {% for order in user.order %}
+                    <div class="order_item">
+                        <div class="col_1" style="padding: 2rem 0;">
+                            <p class="name">
+                                <span> Номер заказа </span>
+                                {{ order.order_number  }}
+                            </p>
+                            <p class="name">
+                                <span> Статус заказа </span>
+                                {{ order.status.name }}
+                            </p>
+                            <p class="name">
+                                <span> Сумма </span>
+                                {{ order.total_price_value }} {{ order.currency.symbol }}, 
+                                {{ order.payment_method.name }}
+                            <p class="name">
+                                <span> Тип доставки </span>
+                                {{order.shipping_type.name }}
+                            </p>
+                            <div class="name"><span>Дата</span>{{ order.created_at.format(' d.m.Y') }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <!-- <div class="order_item">
+                    <div class="col_1">
+                        <img src="{{ 'assets/images/product/imsg_9310.jpg' | theme }}" alt="">
+                        <p class="name">
+                            <span>Зеленый чай</span>
+                            BiLuoChun
+                        </p>
+                    </div>
+                    <div class="col_2">
+                        <div class="price">430 <span>грн.</span></div>
+                        <p>2</p>
+                        <div class="price">860 <span>грн.</span></div>
+                    </div>
+                </div>
+                <div class="order_item">
+                    <div class="col_1">
+                        <img src="{{ 'assets/images/product/imsg_9310.jpg' | theme }}" alt="">
+                        <p class="name">
+                            <span>Зеленый чай</span>
+                            BiLuoChun
+                        </p>
+                    </div>
+                    <div class="col_2">
+                        <div class="price">430 <span>грн.</span></div>
+                        <p>2</p>
+                        <div class="price">860 <span>грн.</span></div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+[viewBag]
+==
+{% if obOffersList.isNotEmpty() %}
+    {% set obOffersLists = obOffersList %}
+{% else %}        
+    {% set obOffersLists = obProduct.offer.sort('price|asc') %}
+{%endif%}
+
+<div class="grams">
+    <span>Вес:</span>
+        
+        {% if quantitys %}    
+            {% for obQuantity in quantitys %}                
+                {% for obOfferItem in obOffersLists %}
+                    {% set obProperty = obOfferItem.property.getByCode('weight') %}
+                    
+                    <p  data-data="{{ {
+                            'cart': [
+                                {'offer_id': obOfferItem.id, 'quantity': obQuantity ? obQuantity : 1 , 'property': {'weight': obOfferItem.name} },
+                            ]
+                        }|json_encode() }}"
+                        onclick="$('.productPrice-{{obProduct.id}}').html('{{ obOfferItem.price }}'); " 
+                        class="card-item-value {{ loop.index == 1 ? 'active' }}" data-price="{{obOfferItem.price}}"> 
+                        
+                         {{ obOfferItem.name }} {{ obProperty.measure.name }}
+                    </p>
+                            
+                {%endfor%}
+            {%endfor%}
+
+        {% else %}            
+        
+            {% for obOfferItem in obOffersLists %}
+                {% set obProperty = obOfferItem.property.getByCode('weight') %}
+                
+                <p  data-data="{{ {
+                        'cart': [
+                            {'offer_id': obOfferItem.id, 'quantity': obQuantity ? obQuantity : 1, 'property': {'weight': obProperty.property_value.getValueString()} },
+                        ]
+                    }|json_encode() }}"
+                    onclick="$('.productPrice-{{obProduct.id}}').html('{{ obOfferItem.price }}'); " 
+                    class="card-item-value {{ loop.index == 1 ? 'active' }}" data-price="{{obOfferItem.price}}"> 
+                    
+                     {{ obProperty.property_value.getValueString() }} {{ obProperty.measure.name }}
+                </p>
+                        
+            {%endfor%}
+        
+        {%endif%}    
+    
+</div>

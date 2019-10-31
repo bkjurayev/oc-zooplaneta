@@ -1,0 +1,71 @@
+title = "Личный кабинет"
+url = "/account"
+layout = "default"
+is_hidden = 0
+child_of = "index"
+hide_crumb = 0
+crumb_title = "Личный кабинет"
+remove_crumb_trail = 0
+crumb_disabled = 0
+
+[session]
+security = "user"
+redirect = "auth"
+
+[account]
+paramCode = "code"
+forceSecure = 0
+
+[UserAddress]
+==
+{% component 'UserAddress' %}
+<div class="wrap">
+    <h1>Личный кабинет</h1>
+    <div class="help_block lk_block">
+        <div class="left">
+            <a href="{{'cabinet/index'| page}}" class="active">Личные данные</a>
+            <a href="{{'cabinet/orders'| page}}">Заказы</a>
+            {#<a href="{{'pages/program'|page}}">Партнерская программа</a>#}
+            <a href="{{'cabinet/password'| page}}">Изменение пароля</a>
+            <a href="#" data-request="onLogout" data-request-data="redirect: '/'" class="last">Выход</a>
+        </div>
+        
+        <div class="right">
+            <form data-request="onUpdate" data-request-flash class="form uptade-form">
+                <div class="col">
+                    <label>Имя</label>
+                    <input type="text" name="name" value="{{ user.name }}">
+                     <label>Почта</label>
+                    <input type="text" name="email" value="{{ user.email }}">
+
+                    <button class="btn btn-success">Сохранить</button>
+                </div>
+                <div class="col">
+                   
+                    
+                    <label>Телефон</label>
+                    <input type="text" class="mask_tel" name="phone" value="{{ user.phone }}">
+                </div>
+                
+    
+            </form>
+                
+               <!--  <div class="col">
+                   <p class="title">Способ оплаты</p>
+                   <a href="#" class="payment">
+                       <img src="{{ 'assets/images/icons/pb.svg' |theme }}" alt="">
+                   </a>
+                   
+                   <a href="#" class="add_payment">
+                       Добавить способ оплаты</a>
+               </div> -->
+        </div>
+    </div>
+</div>
+
+
+{% put scripts %}
+    <script>
+        $(".mask_tel").mask("+99 (999) 999-99-99");
+    </script>
+{% endput %}
